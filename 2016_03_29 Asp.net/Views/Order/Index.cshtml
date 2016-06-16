@@ -1,0 +1,129 @@
+﻿@model _2016_03_29_Asp.net.Models.Orders
+
+@{
+    ViewBag.Title = "訂單查詢";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>@ViewBag.Title </h2>
+    @using (Html.BeginForm("Index", "Order", FormMethod.Post, new { id = "Form1" }))
+    {
+        <table class="table">
+            <tr>
+                <td>
+                    <h5>訂單編號</h5>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.OrderID)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>客戶名稱</h5>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.CompanyName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>負責員工</h5>
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.EmployeeID, (List<SelectListItem>)ViewBag.empInfo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>出貨公司</h5>
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.ShipperID, (List<SelectListItem>)ViewBag.companyInfo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>訂購日期</h5>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.OrderDate, new { @type = "date" })
+                </td>
+                <td>
+                    <h5>出貨日期</h5>
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.ShippedDate, new { @type = "date" })
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td></td>
+                <td>
+                    <button class="btn btn-success" id="submitButton" type="submit">查詢</button>
+                    <button class="btn btn-success" id="insertButton" type="submit">新增</button>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <table class="table">
+                <tr>
+                    <td>
+                        訂單編號
+                    </td>
+                    <td>
+                        客戶名稱
+                    </td>
+                    <td>
+                        訂購日期
+                    </td>
+                    <td>
+                        發貨日期
+                    </td>
+                </tr>
+                @foreach (var row in (List<_2016_03_29_Asp.net.Models.Orders>)ViewBag.orders)
+                {
+                    <tr>
+                        <td>
+                            @row.OrderID
+                        </td>
+                        <td>
+                            @row.CompanyName
+                        </td>
+                        <td>
+                            @row.OrderDate
+                        </td>
+                        <td>
+                            @row.ShippedDate
+                        </td>
+                        <td>
+                            <a class="deleteButton" href="#">刪除</a>
+                            <input class="hidOrderId" type="hidden" value='@row.OrderID' />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+    }
+
+    <script type="text/javascript">
+
+
+        $(".deleteButton").click(function (e) {
+
+            var tr = $(this).closest('tr')
+            $.ajax({
+                type: "POST",
+                url: "/Order/DeleteOrder",
+                data: "OrderID=" + $(this).next().val(),
+                dataType: "json",
+                success: function (response) {
+                    $(tr).remove();
+                }
+            });
+            return false;
+        });
+
+    </script>
+

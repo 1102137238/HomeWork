@@ -12,8 +12,12 @@ namespace _2016_03_29_Asp.net.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Orders()
         {
-            OrderDetails = new HashSet<OrderDetails>();
+            var od = new List<Models.OrderDetails>();
+            od.Add(new OrderDetails() { ProductID = 1 });
+            this.OrderDetails = od;
         }
+
+        public List<OrderDetails> OrderDetails { get; set; }
 
         [Key]
         public string OrderID { get; set; }
@@ -62,8 +66,13 @@ namespace _2016_03_29_Asp.net.Models
         public virtual Customers Customers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
-
+        
         public virtual Shippers Shippers { get; set; }
+
+        public string ProductID { get; set; }
+
+        public string UnitPrice { get; set; }
+
+        public string Qty { get; set; }
     }
 }

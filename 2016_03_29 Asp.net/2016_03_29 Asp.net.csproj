@@ -207,6 +207,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Customers.cs" />
+    <Compile Include="Models\CustomersService.cs" />
     <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\CompanyService.cs" />
     <Compile Include="Models\EmployeeService.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\OrderService.cs" />
     <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\ProductsService.cs" />
     <Compile Include="Models\Scores.cs" />
     <Compile Include="Models\Shippers.cs" />
     <Compile Include="Models\Suppliers.cs" />
@@ -258,7 +260,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -286,6 +290,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\InsertOrderIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
